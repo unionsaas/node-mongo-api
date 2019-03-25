@@ -1,0 +1,32 @@
+{
+  "name": "mongo-api",
+  "version": "1.0.0",
+  "description": "Mongodb http server ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node app.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unionsaas/node-mongo-api.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "mongo",
+    "api",
+    "mongoapi"
+  ],
+  "author": "Zengs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unionsaas/node-mongo-api/issues"
+  },
+  "homepage": "https://github.com/unionsaas/node-mongo-api#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.2.2",
+    "morgan": "^1.9.1"
+  }
+}
