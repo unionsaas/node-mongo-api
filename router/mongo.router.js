@@ -2,8 +2,6 @@ let express = require('express')
 let router = express.Router()
 
 
-let MongoClient = require('mongodb').MongoClient
-
 // let biz = {
 //     collection:'test',
 //     method:'findOne',
@@ -12,6 +10,7 @@ let MongoClient = require('mongodb').MongoClient
 
 //biz={"collection":"test","method":"find","params":[{"id":"1002"}],"limit":2}
 router.post('/mongo', async function (req, res) {
+    //let appid = req.body.appid
     let biz = req.body.biz
     biz = JSON.parse(biz)
     console.log(biz)
@@ -19,8 +18,7 @@ router.post('/mongo', async function (req, res) {
     let m = biz.method
     let p = biz.params
 
-    let mongo = await MongoClient.connect('mongodb://unionlive:unionlive@211.152.57.29:39017/unionlive?authSource=admin&authMechanism=SCRAM-SHA-1', {useNewUrlParser: true})
-    let db = mongo.db()
+    let db = global.mongo.db()
     let collection = await db.collection(c)
     let rs
     if (!p || p.length == 0) {
@@ -41,10 +39,8 @@ router.post('/mongo', async function (req, res) {
         rs = await rs.toArray()
     }
     console.log(rs)
-
     res.header('Content-Type', 'application/json')
     res.send(rs)
     res.end()
 })
-
 module.exports = router

@@ -1,24 +1,31 @@
-let config = require('./config')
-let express = require('express')
-let app = express()
+let config = require('./config');
 
-// Express Log
-let morgan = require('morgan')
-app.use(morgan('short'))
+(async (cb)=> {
+    let MongoClient = require('mongodb').MongoClient
+    let mongo = await MongoClient.connect(config.mongo.url, {useNewUrlParser: true})
+    global.mongo = mongo
+    cb()
+})(()=> {
+    let express = require('express')
+    let app = express()
 
-// 去除Express Header
-app.disable('x-powered-by')
+    // Express Log
+    let morgan = require('morgan')
+    app.use(morgan('short'))
 
-// 静态文件目录
-app.use(express.static('./public'))
+    // 去除Express Header
+    app.disable('x-powered-by')
 
-// Body数据解析
-let bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({extended:false}))
+    // 静态文件目录
+    app.use(express.static('./public'))
 
-app.use(require('./router/router'))
+    // Body数据解析
+    let bodyParser = require('body-parser')
+    app.use(bodyParser.urlencoded({extended:false}))
 
-app.listen(config.server.port, function () {
-    console.log(`Start Server http://localhost:${config.server.port}/`)
+    app.use(require('./router/mongo.router'))
+
+    app.listen(config.server.port, function () {
+        console.log(`Start Server http://localhost:${config.server.port}/`)
+    })
 })
-
