@@ -16,22 +16,11 @@ router.post('/mongo', async function (req, res) {
     console.log(biz)
     let c = biz.collection
     let m = biz.method
-    let p = biz.params
+    let p = biz.params || []
 
     let db = global.mongo.db()
     let collection = await db.collection(c)
-    let rs
-    if (!p || p.length == 0) {
-        rs = await collection[m]()
-    } else if (p[0]) {
-        rs = await collection[m](p[0])
-    } else if (p[1]) {
-        rs = await collection[m](p[0], p[1])
-    } else if (p[2]) {
-        rs = await collection[m](p[0], p[1], p[2])
-    } else if (p[3]) {
-        rs = await collection[m](p[0], p[1], p[2], p[3])
-    }
+    let rs = await collection[m](...p)
     if (m == 'find') {
         rs = biz.sort ? rs.sort(biz.sort) : rs
         rs = biz.skip ? rs.skip(biz.skip) : rs
