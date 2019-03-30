@@ -3,9 +3,7 @@
  */
 module.exports = {
     root: true,
-    //使用配置模板
     extends: [
-        "plugin:vue/essential",
         'eslint:recommended'
     ],
     env: {

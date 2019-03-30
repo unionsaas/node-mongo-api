@@ -7,5 +7,4 @@ module.exports = {
     mongo: {
         url: 'mongodb://unionlive:unionlive@211.152.57.29:39017/unionlive?authSource=admin&authMechanism=SCRAM-SHA-1'
     }
-
 }
