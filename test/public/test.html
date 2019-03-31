@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mongodb Server Test</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .container{width: 80%;margin: 10px auto;border: solid 1px #dddddd}
+        .container p{margin: 15px 30px;}
+        .container p input{margin:0 20px 0 10px;width: 20%;height: 20px;line-height: 30px;}
+        .container .content p{float: left;margin: 15px 1%;width: 48%;}
+        .container .content p textarea{width: 100%;height: 500px;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>Appid:<input type="text" id="appid" value="123456"> Secret:<input type="text" id="secret" value="11111111"><button>发送请求</button></p>
+    <div class="content">
+        <p>ReqBody:<br><textarea id="reqbiz"></textarea></p>
+        <p>ResBody:<br><textarea id="resbiz"></textarea></p>
+        <div style="clear: both;"></div>
+    </div>
+</div>
+</body>
+</html>
