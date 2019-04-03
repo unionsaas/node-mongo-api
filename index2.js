@@ -57,14 +57,15 @@ H.prototype.start = (port=10508, koaStatic)=>{
 
 /**
  * 执行Mongodb操作
- * @param mql  执行操作的JSON对象
+ * @param mql
  */
 H.prototype.mongo = async (mql)=>{
+    mql = JSON.parse(mql)
     console.log(mql)
     let p = mql.params || []
     let db = global.mongo[mql.db||'default'].db(mql.db||null)
     let collection = await db.collection(mql.collection)
-    let rs = await collection[mql.method](...p)
+    let rs = await collection[biz.method](...p)
     if (mql.method == 'find') {
         rs = mql.sort ? rs.sort(mql.sort) : rs
         rs = mql.skip ? rs.skip(mql.skip) : rs

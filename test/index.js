@@ -7,6 +7,18 @@ const path = require('path')
 const Koa = require('koa')
 const app = new Koa()
 
+
+let defConf = {
+    server: {
+        port: 10508,
+        public:'public'
+    },
+    mongo: {
+        url: 'mongodb://unionlive:unionlive@211.152.57.29:39017/unionlive?authSource=admin&authMechanism=SCRAM-SHA-1&useNewUrlParser=true'
+        //url: 'mongodb://127.0.0.1:27017/test'
+    }
+}
+
 function H(){
 
 }
@@ -21,7 +33,7 @@ H.prototype.mongo = (key='default', mongoConnect)=>{
 }
 
 /**
- * Koa
+ *
  * @param asyncFun
  */
 H.prototype.use = (asyncFun)=>{
@@ -55,24 +67,22 @@ H.prototype.start = (port=10508, koaStatic)=>{
     console.log('listening on port ', port)
 }
 
-/**
- * 执行Mongodb操作
- * @param mql  执行操作的JSON对象
- */
-H.prototype.mongo = async (mql)=>{
-    console.log(mql)
-    let p = mql.params || []
-    let db = global.mongo[mql.db||'default'].db(mql.db||null)
-    let collection = await db.collection(mql.collection)
-    let rs = await collection[mql.method](...p)
-    if (mql.method == 'find') {
-        rs = mql.sort ? rs.sort(mql.sort) : rs
-        rs = mql.skip ? rs.skip(mql.skip) : rs
-        rs = mql.limit ? rs.limit(mql.limit) : rs
-        rs = await rs.toArray()
-    }
-    //Mongo响应结果
-    console.log(rs)
-}
+module.exports = async (config = defConf) => {
+    let MongoClient = require('mongodb').MongoClient
+    let mongo = await MongoClient.connect(config.mongo.url, {})
+    global.mongo = mongo
 
-module.exports = new H()
+    // https://www.npmjs.com/package/koa-static
+    app.use(require('koa-static')(config.server.public, {}))
+
+    app.use(async (ctx, next) => {
+        const start = Date.now()
+        await next()
+        const ms = Date.now() - start
+        console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    })
+
+    app.use(router.routes()).use(router.allowedMethods())
+    app.listen(config.server.port)
+    console.log('listening on port ', config.server.port)
+}

@@ -1,11 +1,13 @@
 # node-mongo-api
 
-Mongodb http server  
+Mongodb http server api 
 
-## 服务地址`/mongo` 
+## 接口说明
 
+Request URL：/   
+Method：POST    
+Content-Type: application/x-www-form-urlencoded    
 参数说明：
-
 
 |字段|类型|是否必填|备注说明|
 |-----|-----|------|--------|
@@ -17,3 +19,9 @@ Mongodb http server
 | skip |number| O |开始数量，`find`方法有效|
 | limit |number| O |结束数量，`find`方法有效，使用skip与limit配合实现分页|
 
+
+
+## 使用
+
+> npm install node-mongo-api  --save       
+> require('node-mongo-api'')({})
