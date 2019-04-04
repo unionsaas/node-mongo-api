@@ -1,8 +1,8 @@
 {
-  "name": "mongo-api",
+  "name": "node-mongo-api",
   "version": "1.0.0",
-  "description": "Mongodb http server ",
-  "main": "index.js",
+  "description": "Mongodb http server api ",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node index.js "
@@ -25,9 +25,6 @@
   },
   "homepage": "https://github.com/unionsaas/node-mongo-api#readme",
   "dependencies": {
-    "koa": "^2.7.0",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
     "mongodb": "^3.2.2"
   }
 }
