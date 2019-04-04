@@ -63,3 +63,5 @@ typings/
 *.ipr
 *.iws
 .idea
+
+package-lock.json

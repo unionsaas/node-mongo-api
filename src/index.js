@@ -14,7 +14,7 @@ module.exports = async (uris={}, options={})=>{
     }
     return async (mql)=>{
         let p = mql.params || []
-        let db = dbs[mql.db].db()
+        let db = dbs[mql.db||'default'].db()
         let collection = await db.collection(mql.collection)
         let rs = await collection[mql.method](...p)
         if (mql.method == 'find') {
@@ -25,5 +25,4 @@ module.exports = async (uris={}, options={})=>{
         }
         return rs
     }
-
 }
