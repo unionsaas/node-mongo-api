@@ -1,6 +1,6 @@
 {
   "name": "node-mongo-mql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mongodb http server api ",
   "main": "src/index.js",
   "scripts": {
