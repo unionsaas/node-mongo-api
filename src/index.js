@@ -13,15 +13,17 @@ module.exports = async (uris={}, options={})=>{
         dbs[k] = (mongo)
     }
     return async (mql)=>{
+        mql = typeof(mql)=='string'?JSON.parse(mql):mql
         let p = mql.params || []
         let db = dbs[mql.db||'default'].db()
-        let collection = await db.collection(mql.collection)
-        let rs = await collection[mql.method](...p)
-        if (mql.method == 'find') {
+        let collection = await db.collection(mql.c)
+        let rs = await collection[mql.m](...p)
+        if (mql.m == 'find') {
             rs = mql.sort ? rs.sort(mql.sort) : rs
             rs = mql.skip ? rs.skip(mql.skip) : rs
             rs = mql.limit ? rs.limit(mql.limit) : rs
             rs = await rs.toArray()
+            rs = mql.total?{total:(await collection.countDocuments(...p)),data:rs}:rs
         }
         return rs
     }
