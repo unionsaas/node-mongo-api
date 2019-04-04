@@ -1,29 +1,28 @@
 {
-  "name": "node-mongo-api",
+  "name": "node-mongo-mql",
   "version": "1.0.0",
   "description": "Mongodb http server api ",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node index.js "
+    "serve": "node src/index.js "
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unionsaas/node-mongo-api.git"
+    "url": "git+https://github.com/unionsaas/node-mongo-mql.git"
   },
   "keywords": [
     "node",
     "mongodb",
     "mongo",
-    "api",
-    "mongoapi"
+    "mongomql"
   ],
   "author": "Zengs",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/unionsaas/node-mongo-api/issues"
+    "url": "https://github.com/unionsaas/node-mongo-mql/issues"
   },
-  "homepage": "https://github.com/unionsaas/node-mongo-api#readme",
+  "homepage": "https://github.com/unionsaas/node-mongo-mql#readme",
   "dependencies": {
     "mongodb": "^3.2.2"
   }
