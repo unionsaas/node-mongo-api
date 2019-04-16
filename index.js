@@ -1,3 +1,5 @@
+let moment = require('moment')
+
 let MongoClient = require('mongodb').MongoClient
 
 /**
@@ -17,6 +19,12 @@ module.exports = async (uris={}, options={})=>{
         let p = mql.params || []
         let db = dbs[mql.db||'default'].db()
         let collection = await db.collection(mql.c)
+        if(mql.m == 'insertOne'){
+            p[0]._createdAt = moment().format('YYYYMMDDHHmmSS')
+        }
+        if(mql.m == 'updateOne'){
+            p[1]._updatedAt = moment().format('YYYYMMDDHHmmSS')
+        }
         let rs = await collection[mql.m](...p)
         if (mql.m == 'find') {
             rs = mql.sort ? rs.sort(mql.sort) : rs
