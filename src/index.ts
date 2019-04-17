@@ -21,6 +21,7 @@ interface MongoDbMql {
 
 /***
  * Node Mongo Mql
+ * API http://mongodb.github.io/node-mongodb-native/3.2/api/
  */
 class MongoMql {
 
@@ -72,10 +73,12 @@ class MongoMql {
         let p: Array<any> = mql.params || []
         let db = await this.db(mql.db)
         let collection = await db.collection(mql.c)
+        let YYYYMMDDHHmmss = moment().format('YYYYMMDDHHmmss')
         if (mql.m == 'insertOne') {
-            p[0]._createdAt = moment().format('YYYYMMDDHHmmSS')
-        } else if (mql.m == 'updateOne') {
-            p[1]._updatedAt = moment().format('YYYYMMDDHHmmSS')
+            p[0]._createdAt = YYYYMMDDHHmmss
+            p[0]._updatedAt = YYYYMMDDHHmmss
+        } else if (mql.m == 'updateOne'||mql.m == 'updateMany') {
+            p[1]['$set']._updatedAt = YYYYMMDDHHmmss
         }
         let rs = await collection[mql.m](...p)
         if (mql.m == 'find') {

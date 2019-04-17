@@ -27,11 +27,13 @@ class MongoMql {
         let p = mql.params || [];
         let db = await this.db(mql.db);
         let collection = await db.collection(mql.c);
+        let YYYYMMDDHHmmss = moment_1.default().format('YYYYMMDDHHmmss');
         if (mql.m == 'insertOne') {
-            p[0]._createdAt = moment_1.default().format('YYYYMMDDHHmmSS');
+            p[0]._createdAt = YYYYMMDDHHmmss;
+            p[0]._updatedAt = YYYYMMDDHHmmss;
         }
-        else if (mql.m == 'updateOne') {
-            p[1]._updatedAt = moment_1.default().format('YYYYMMDDHHmmSS');
+        else if (mql.m == 'updateOne' || mql.m == 'updateMany') {
+            p[1]['$set']._updatedAt = YYYYMMDDHHmmss;
         }
         let rs = await collection[mql.m](...p);
         if (mql.m == 'find') {
