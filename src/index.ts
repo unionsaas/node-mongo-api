@@ -2,6 +2,9 @@ import moment from 'moment'
 import {MongoClient} from 'mongodb'
 
 interface MongoDbConfig {
+    /**
+     * 数据库连接配置 Key为数据库名，value为 Mongodb连接字符串
+     */
     [name: string]: string
 }
 
@@ -38,7 +41,7 @@ class MongoMql {
     /**
      * 加载Mongodb连接
      * @param uris
-     * @param options
+     * @param options 连接可选配置
      */
     constructor(uris: MongoDbConfig = {}, options: any = {}) {
         for (let k in uris) {
