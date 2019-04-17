@@ -10,16 +10,16 @@ interface MongoDbMql {
     c: string
     m: string
     params: Array<any>
-    sort: Array<any>
-    skip: number
-    limit: number
-    total: boolean | number
+    sort?: Array<any>
+    skip?: number
+    limit?: number
+    total?: boolean | number
 }
 
 /***
  * Node Mongo Mql
  */
-export class MongoMql {
+class MongoMql {
 
     /**
      * 构建实例对象
@@ -85,3 +85,4 @@ export class MongoMql {
         return rs
     }
 }
+export = MongoMql
