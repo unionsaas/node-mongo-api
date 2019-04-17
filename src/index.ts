@@ -26,7 +26,7 @@ class MongoMql {
      * @param uris
      * @param options
      */
-    static now(uris: MongoDbConfig = {}, options: any = {}) {
+    static now(uris: MongoDbConfig = {}, options: any = {}):MongoMql {
         return new MongoMql(uris, options)
     }
 
